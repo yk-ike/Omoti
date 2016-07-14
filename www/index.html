@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.addEventListener('load',onLoad,false);
+        function onLoad() {
+            var width = $("body").width();
+            var height = $("body").height();
+            $("#my-canvas").attr("width",width-20);
+            $("#my-canvas").attr("height",height-60-100);
+ 
+            $(".buttons").height(100);
+            $(".buttons").css("top",height-100);
+            $(".mybutton").width( (width-44)/3 );
+            $(".mybutton").height( 100 );
+ 
+            var myCanvas = $("#my-canvas").get(0);
+            var myContext = myCanvas.getContext("2d");
+            myContext.strokeStyle = "red";
+            myContext.lineWidth = 5;
+            var startX = 0;
+            var startY = 0;
+            var offsetLeft = $("#my-canvas").offset().left;
+            var offsetTop = $("#my-canvas").offset().top;
+            
+            $("#my-canvas").on("touchstart",function(event){
+              event.preventDefault();
+              var pageX = event.originalEvent.touches[0].pageX;
+              var pageY = event.originalEvent.touches[0].pageY;
+              startX = pageX - offsetLeft;
+              startY = pageY - offsetTop;
+            });
+            
+            $("#my-canvas").on("touchmove",function(event){
+              var pageX = event.originalEvent.touches[0].pageX;
+              var pageY = event.originalEvent.touches[0].pageY;
+              var endX = pageX - offsetLeft;
+              var endY = pageY - offsetTop;
+              myContext.beginPath();
+              myContext.moveTo(startX, startY);
+              myContext.lineTo(endX, endY);
+              myContext.stroke();
+              startX = endX;
+              startY = endY;
+            });
+ 
+        }
+ 
+        function clearImage() {
+            var canvas = $("#my-canvas");
+            var myCanvas = canvas.get(0);
+            var myContext = myCanvas.getContext("2d");
+            myContext.clearRect( 0 , 0 , canvas.width(), canvas.height() );
+        }
+    </script>
+</head>
+<body>
+    <div class="buttons">
+      <div class="mybutton" onClick="saveImage()">save</div>
+      <div class="mybutton" onClick="loadImage()">load</div>
+      <div class="mybutton" onClick="clearImage()">clear</div>
+    </div>
+    <canvas id="my-canvas">
+</body>
+</html>

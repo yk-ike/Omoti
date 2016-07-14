@@ -1,0 +1,33 @@
+/* Empty. Add your own CSS if you like */
+html {
+    height:100%;
+}
+body {
+    background: #DDDDDD;
+    margin:0px;
+    padding : 0px;
+    height: 100%;
+}
+#my-canvas {
+  margin-top : 30px;
+    margin-left : 10px;
+    padding : 0px;
+    background : #FFFFFF;
+    border: thin inset #AAAAAA;
+}
+.buttons {
+    position:absolute;
+    top:670px;
+    left:20px;
+}
+.mybutton {
+  position:relative;
+    float: left;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    border: 1px solid #000;
+    width: 185px;
+    height:80px;
+}
